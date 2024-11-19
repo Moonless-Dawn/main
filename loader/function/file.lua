@@ -77,6 +77,9 @@ function func:listfiles(path, type)
 	local t = {}
 	local n = false
 	for i, v in next, listfiles(path) do
+		if v:sub(1, 1) == "." then
+			n = v:split(".")[2]
+		end
 		if v:find("/") then
 			n = v:gsub("/", "")
 		end
@@ -84,13 +87,13 @@ function func:listfiles(path, type)
 			n = n:gsub([[\]], "")
 		end
 		if type and type == "lua" and n and n:find(".lua") then
-			if n:sub(tonumber(# n - 3), tonumber(# n)) == ".lua" then
-				n = n:sub(1, tonumber(# n - 4))
+			if n:sub(tonumber(#n - 3), tonumber(#n)) == ".lua" then
+				n = n:sub(1, tonumber(#n - 4))
 			end
 		end
 		if type and type == "json" and n and n:find(".json") then
-			if n:sub(tonumber(# n - 4), tonumber(# n)) == ".json" then
-				n = n:sub(1, tonumber(# n - 5))
+			if n:sub(tonumber(#n - 4), tonumber(#n)) == ".json" then
+				n = n:sub(1, tonumber(#n - 5))
 			end
 		end
 		if n then
