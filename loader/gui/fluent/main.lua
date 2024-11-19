@@ -2273,7 +2273,7 @@ local aa = {
                 )
                 s(
                     "UISizeConstraint",
-                    {MinSize = Vector2.new(300, 165), MaxSize = Vector2.new(800, math.huge), Parent = P.Root}
+                    {MinSize = Vector2.new(400, 165), MaxSize = Vector2.new(800, math.huge), Parent = P.Root}
                 )
                 P.Root.Size = UDim2.fromOffset(Q.TextBounds.X + 40, 165)
                 if Q.TextBounds.X + 40 > v.Size.X.Offset - 120 then
