@@ -75,31 +75,29 @@ end
 function func:listfiles(path, type)
 	assert(typeof(path) == "string", "Unable to concat: " .. tostring(path) .. " not string")
 	local t = {}
-	local n = false
+	local n = nil
 	for i, v in next, listfiles(path) do
 		if v:sub(1, 1) == "." then
-			n = v:split(".")[2]
+			n = v:sub(2, #v)
 		end
-		if v:find("/") then
-			n = v:gsub("/", "")
+		if (n or v):find("/") then
+			n = (n or v):gsub("/", "")
 		end
-		if n and n:find([[\]]) then
-			n = n:gsub([[\]], "")
+		if (n or v):find([[\]]) then
+			n = (n or v):gsub([[\]], "")
 		end
-		if type and type == "lua" and n and n:find(".lua") then
-			if n:sub(tonumber(#n - 3), tonumber(#n)) == ".lua" then
-				n = n:sub(1, tonumber(#n - 4))
+		if type and type == "lua" and (n or v:find(".lua")) then
+			if (n or v):sub(tonumber(#n - 3), tonumber(#n)) == ".lua" then
+				n = (n or v):sub(1, tonumber(#n - 4))
 			end
 		end
-		if type and type == "json" and n and n:find(".json") then
-			if n:sub(tonumber(#n - 4), tonumber(#n)) == ".json" then
-				n = n:sub(1, tonumber(#n - 5))
+		if type and type == "json" and (n or v):find(".json") then
+			if (n or v):sub(tonumber(#n - 4), tonumber(#n)) == ".json" then
+				n = (n or v):sub(1, tonumber(#n - 5))
 			end
 		end
-		if n then
-			local l = path:gsub("/", "")
-			n = n:gsub(l, "")
-		end
+		local l = path:gsub("/", "")
+		n = (n or v):gsub(l, "")
 		table.insert(t, n or v)
 	end
 	return t
