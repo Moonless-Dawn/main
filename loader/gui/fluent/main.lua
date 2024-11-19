@@ -636,10 +636,10 @@ local aa = {
         end
         function q.Create(r)
             if q.Window.Root.Position.Y.Offset >= 300 or q.Window.Root.Position.Y.Offset <= -300 or q.Window.Root.Position.X.Offset >= 750 or q.Window.Root.Position.X.Offset <= -300 then
-                q.Window.Root.Position = UDim2.fromOffset(
+                --[[q.Window.Root.Position = UDim2.fromOffset(
                     game:GetService "Workspace".CurrentCamera.ViewportSize.X / 2 - q.Window.Root.Size.X.Offset / 2,
                     game:GetService "Workspace".CurrentCamera.ViewportSize.Y / 2 - q.Window.Root.Size.Y.Offset / 2
-                )
+                )]]
             end
             local s = {Buttons = 0}
             s.TintFrame =
